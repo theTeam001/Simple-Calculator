@@ -4,15 +4,16 @@ from operations import add, subtract, multiply, divide
 
 def calculator():
     print("Simple Calculator")
-
+    print("You can perform basic operations: +, -, *, /.")
+    
     while True:
-        # Get user input for the operation
         try:
+            # Get user input for the first number, operator, and second number
             num1 = float(input("Enter first number: "))
             operator = input("Enter operator (+, -, *, /): ")
             num2 = float(input("Enter second number: "))
-            
-            # Perform the operation based on the input
+
+            # Check if the operator is valid and perform the corresponding operation
             if operator == "+":
                 result = add(num1, num2)
             elif operator == "-":
@@ -20,17 +21,24 @@ def calculator():
             elif operator == "*":
                 result = multiply(num1, num2)
             elif operator == "/":
+                # Handle division by zero
+                if num2 == 0:
+                    print("Error: Division by zero is not allowed.")
+                    continue
                 result = divide(num1, num2)
             else:
-                print("Invalid operator!")
+                print("Invalid operator! Please choose from (+, -, *, /).")
                 continue
 
+            # Display the result of the operation
             print(f"Result: {result}")
             
-            # Ask if user wants to perform another calculation
-            next_calculation = input("Do you want to perform another calculation? (y/n): ")
-            if next_calculation.lower() != "y":
+            # Ask if the user wants to perform another calculation
+            next_calculation = input("Do you want to perform another calculation? (y/n): ").strip().lower()
+            if next_calculation != "y":
+                print("Thank you for using the calculator. Goodbye!")
                 break
 
-        except ValueError as e:
-            print(f"Error: {e}")
+        except ValueError:
+            # Handle invalid number input
+            print("Error: Invalid input. Please enter a valid number.")
