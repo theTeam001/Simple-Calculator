@@ -1,6 +1,6 @@
 # calculator.py
 
-from operations import add, subtract, multiply, divide
+from operations import add, subtract, multiply, divide, modulus, power, sqrt, log, power_of_10
 import math
 
 def calculator():
@@ -8,12 +8,12 @@ def calculator():
     
     print("Simple Calculator")
     print("You can perform basic operations: +, -, *, /.")
-    print("Additional operations: sqrt (square root), pow (exponentiation), history (view calculation history), clear (reset the calculator).")
+    print("Additional operations: sqrt (square root), pow (exponentiation), modulus, log (logarithm), power_of_10, history (view calculation history), clear (reset the calculator).")
     
     while True:
         try:
             # Get user input for the operation type
-            operation = input("Enter operation (+, -, *, /, sqrt, pow, history, clear): ").strip().lower()
+            operation = input("Enter operation (+, -, *, /, sqrt, pow, modulus, log, power_of_10, history, clear): ").strip().lower()
             
             if operation == "history":
                 # Display calculation history
@@ -36,14 +36,31 @@ def calculator():
                 if num < 0:
                     print("Error: Cannot calculate square root of a negative number.")
                     continue
-                result = math.sqrt(num)
+                result = sqrt(num)
                 history.append(f"sqrt({num}) = {result}")
             
             elif operation == "pow":
                 base = float(input("Enter the base number: "))
                 exponent = float(input("Enter the exponent: "))
-                result = math.pow(base, exponent)
+                result = power(base, exponent)
                 history.append(f"{base} ^ {exponent} = {result}")
+            
+            elif operation == "modulus":
+                num1 = float(input("Enter the first number: "))
+                num2 = float(input("Enter the second number: "))
+                result = modulus(num1, num2)
+                history.append(f"{num1} % {num2} = {result}")
+            
+            elif operation == "log":
+                num = float(input("Enter the number for logarithm: "))
+                base = float(input("Enter the base for logarithm (default is 10): ") or 10)
+                result = log(num, base)
+                history.append(f"log({num}, {base}) = {result}")
+            
+            elif operation == "power_of_10":
+                exponent = float(input("Enter the exponent: "))
+                result = power_of_10(exponent)
+                history.append(f"10 ^ {exponent} = {result}")
             
             else:
                 # Get user input for the first number, operator, and second number
@@ -65,7 +82,7 @@ def calculator():
                         continue
                     result = divide(num1, num2)
                 else:
-                    print("Invalid operator! Please choose from (+, -, *, /).")
+                    print("Invalid operator! Please choose from (+, -, *, /, sqrt, pow, modulus, log, power_of_10).")
                     continue
                 
                 history.append(f"{num1} {operator} {num2} = {result}")
