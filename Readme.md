@@ -1,6 +1,3 @@
-Sure! Here's a `README.md` file for the Python project you requested:
-
----
 
 # Simple Command-Line Calculator
 
